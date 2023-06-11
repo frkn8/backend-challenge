@@ -51,7 +51,7 @@ const generateToken = async (req, res, next) => {
     next(error);
   }
 };
-
+//tokenin geçerli olup olmadığını kontrol ediyoruz.
 const restricted = async (req, res, next) => {
   try {
     const token = req.headers.authorization;

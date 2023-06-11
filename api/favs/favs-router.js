@@ -4,7 +4,7 @@ const favMw = require("./favs-middleware");
 const userMdl = require("../users/users-model");
 const postModel = require("../posts/posts-model");
 
-// adds post to favs
+// adds post to favs// 
 router.post(
   "/:user_id/:post_id",
   favMw.isFavoritedBefore,

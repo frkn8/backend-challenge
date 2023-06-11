@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const commentMdl = require("./comments-model");
 const commentMw = require("./comments-middleware");
-
+// yorum gönderdiğimiz yer 
 router.post(
   "/:user_id/:post_id",
   commentMw.checkPayload,
@@ -24,7 +24,7 @@ router.post(
     }
   }
 );
-
+// yorumun id sine göre dülteiyor.
 router.put("/:comment_id", async (req, res, next) => {
   try {
     const commentId = req.params.comment_id;
@@ -45,7 +45,7 @@ router.put("/:comment_id", async (req, res, next) => {
     next(error);
   }
 });
-
+//oluşturulan yorumu silme.
 router.delete("/:comment_id", async (req, res, next) => {
   try {
     const commentId = req.params.comment_id;

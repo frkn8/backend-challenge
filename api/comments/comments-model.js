@@ -16,7 +16,7 @@ async function getByPostId(id) {
 
   return commentsForPost;
 }
-
+// yorumların tamamını kimin neye göre yazdığını getiriyor.
 async function create(user_id, post_id, comment) {
   const [commendId] = await db("comments").insert({
     user_id: user_id,
@@ -26,14 +26,14 @@ async function create(user_id, post_id, comment) {
   return commendId;
 }
 
-
+//textid ye göre yorum güncellemesi,(command id)
 async function update(textId, updatedFields) {
   await db("comments").where({ comment_id: textId }).update(updatedFields);
-  
+  // güncellenenler
   const updatedComment = await db("comments").where({ comment_id: textId }).first();
   return updatedComment;
 }
-
+//silnenler
 
 async function deleteComment(textId) {
   const deletedComment = await db("comments as c").where("c.comment_id", textId).delete();
