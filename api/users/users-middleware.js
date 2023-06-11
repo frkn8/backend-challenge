@@ -23,7 +23,7 @@ const isIdExist = async (req,res,next)=>{
         const { id } = req.params;
         const users = await userMdl.getByFilter({"user_id": id});
         if(users.length == 0) {
-            next({status: 400, message: `${id} id'li kullanıcı bulunamadı!...`})
+            next({status: 404, message: `${id} id'li kullanıcı bulunamadı!...`})
         } else {
             req.user = users[0];
             next()

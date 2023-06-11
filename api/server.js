@@ -22,10 +22,10 @@ server.use(express.json());
 
 //router
 server.get('/', (req,res)=> {
-  res.send('Server up and running...')
+  res.json({message: process.env.MESSAGE || 'Server up and running...'})
 })
 
-server.use('/api/users', restricted, userRouter);
+server.use('/api/users', restricted, userRouter); //restricted tokenin geçerliliğini kontrol ediyor.
 server.use('/api/auth', authRouter);
 server.use("/api/posts", restricted, postsRouter);
 server.use("/api/comments", commentsRouter);

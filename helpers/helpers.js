@@ -1,6 +1,5 @@
-const db = require('../data/db-config'); // Assuming you have a Knex configuration file
+const db = require('../data/db-config'); 
 
-// Define the TokenBlacklist model
 const TokenBlacklist = {
   create: async function ({ token }) {
     try {
@@ -8,6 +7,15 @@ const TokenBlacklist = {
     } catch (error) {
       console.error('Error adding token to the blacklist:', error);
       throw new Error('Unable to add token to the blacklist');
+    }
+  },
+  exists: async function (token) {
+    try {
+      const result = await db('token_blacklist').where({ token: token }).first();
+      return !!result;
+    } catch (error) {
+      console.error('Error checking if token exists in the blacklist:', error);
+      throw new Error('Unable to check if token exists in the blacklist');
     }
   },
 };

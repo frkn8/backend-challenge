@@ -30,8 +30,8 @@ router.get("/:id", usersMw.isIdExist, async (req, res, next) => {
 //creates new post
 router.post("/", postsMw.checkPayload, async (req, res, next) => {
   try {
-    const { text, user_id } = req.body;
-    const newpost = { user_id: user_id, text: text };
+    const { text } = req.body;
+    const newpost = { user_id: req.decodedUser.user_id, text: text }; //Kullanıcı idsi saklanıyor post atarken bu kontrol ediliyor. Token in içine gizlenmiş oluyor. Herkes kendi id si ile post atabilir başkasının id si ile post atamıyor.
     const insertedpost = await postsModel.create(newpost);
     if (!insertedpost) {
       next(error);

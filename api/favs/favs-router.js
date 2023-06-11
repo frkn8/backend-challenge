@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const favModel = require("./favs-model");
 const favMw = require("./favs-middleware");
-const userMdl = require('../users/users-model');
-const postModel = require('../posts/posts-model');
+const userMdl = require("../users/users-model");
+const postModel = require("../posts/posts-model");
 
 // adds post to favs
 router.post(
@@ -23,20 +23,15 @@ router.post(
         return res.status(404).json({ message: "post bulunamadı." });
       }
 
-      if (userId && postId) {
-        const favoritedpost = await favModel.create(userId, postId);
-        res
-          .status(200)
-          .json({ message: "post beğenilere eklendi.", favoritedpost });
-      } else {
-        res.status(400).json({ message: "Beğenilere eklenemedi." });
-      }
+      const favoritedpost = await favModel.create(userId, postId);
+      res
+        .status(200)
+        .json({ message: "post beğenilere eklendi.", favoritedpost });
     } catch (error) {
       next(error);
     }
   }
 );
-
 
 router.delete(
   "/:user_id/:post_id",
@@ -50,10 +45,6 @@ router.delete(
         res
           .status(200)
           .json({ message: `post with id: ${postId} removed from favs.` });
-      } else {
-        res.status(400).json({
-          message: `Cannot remove the post with id: ${postId} from favs.`,
-        });
       }
     } catch (error) {
       next(error);
