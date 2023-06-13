@@ -2,7 +2,7 @@ const router = require('express').Router();
 const userMdl = require('./users-model');
 const userMw = require('./users-middleware');
 
-
+//tüm kullanıcıları görüntülüyoruz
 router.get('/', async (req,res,next)=>{
     try {
         const users = await userMdl.getAll();
@@ -11,7 +11,7 @@ router.get('/', async (req,res,next)=>{
         next(err)
     }
 })
-
+// belirli bir id ye göre kullanıcı çekiyor
 router.get('/:id', userMw.isIdExist, async (req,res,next)=>{
     try {
         const { id } = req.params;
@@ -21,7 +21,7 @@ router.get('/:id', userMw.isIdExist, async (req,res,next)=>{
         next(err)
     }
 })
-
+// id ye göre kullanıcıyı siliyor
 router.delete('/:id', userMw.isIdExist, async (req,res,next)=>{
     try {
         const { id } = req.params;
@@ -36,7 +36,7 @@ router.delete('/:id', userMw.isIdExist, async (req,res,next)=>{
         next(err)
     }
 })
-
+// id ye göre kullanıcıyı düzenliyor
 router.put('/:id', userMw.payloadCheck, userMw.isIdExist, async (req,res,next)=>{
     try {
         const { id } = req.params;
